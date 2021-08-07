@@ -1,6 +1,24 @@
-package LinkedList;
+package LinkedListStructures;
 
+// Singly Linked List
 public class LinkedList<T> {
+
+    // Node class
+    /*  This exact code for this node class is present in Stack and Queue. It is probably a good idea to
+     *  remove this class and put it as a separate class file for the 3 classes to use, however that would
+     *  involve changing a lot of code that I don't want to do, but I'd like to say that I'm completely aware
+     *  of this and that if one change should be made, it would be this.
+     */
+    private static class Node<T> {
+
+        Node<T> next;
+        T data;
+
+        public Node(T data) {
+            this.data = data;
+            next = null;
+        }
+    }
 
     private Node<T> head;
     private Node<T> tail;
@@ -163,14 +181,3 @@ public class LinkedList<T> {
     }
 }
 
-// Node class
-class Node<T> {
-
-    Node<T> next;
-    T data;
-
-    public Node(T data) {
-        this.data = data;
-        next = null;
-    }
-}
