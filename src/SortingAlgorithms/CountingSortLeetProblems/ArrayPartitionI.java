@@ -17,7 +17,7 @@ public class ArrayPartitionI {
                 count[num + (10000)]++;
             }
 
-            // Then iterate through count array backwards and add to ans the max value
+            // Then iterate through count array backwards and add to ans alternating values
             int maxNum = nums.length/2;
             boolean min = false;
             for (int i = count.length-1; i >= 0; i--)
