@@ -41,7 +41,6 @@ public class AcodemiaI {
                     h = citationNumber;
                     ++citationNumber;
                     papers = count[arr[citationNumber]];
-                    papers++;
                 }
 
 
