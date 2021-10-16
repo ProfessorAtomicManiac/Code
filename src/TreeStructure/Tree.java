@@ -8,7 +8,6 @@ import java.util.Iterator;
 
 public class Tree <E> implements Iterable<E>{
 
-    // TreeNode class originally in BinaryTree.java
     private TreeNode<E> root;
     /* I've decided against having a size method which stores the number of nodes
      * because it is very difficult to keep track of which nodes are actually part
@@ -173,6 +172,9 @@ public class Tree <E> implements Iterable<E>{
         {
             return children;
         }
+
+        // Note: I assume the programmer will build the tree from the root to the leaves
+        // otherwise, the root would be inconsistent and incorrect
 
         public void setParent(E parent)
         {
