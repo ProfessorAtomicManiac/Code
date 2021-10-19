@@ -19,6 +19,48 @@ public class BinaryTree<E> {
         root = new BinaryTreeNode<>(element);
     }
 
+    // Constructing a binary tree from its preorder and inorder
+    // Yeah I know it has too many parameters
+    public BinaryTreeNode<E> createBinaryTree(E[] preOrder, E[] inOrder, int begin, int end, int preOrderIndex, boolean[] visited)
+    {
+        // Iterate thru preOrder
+        System.err.println(preOrderIndex + ": " + preOrder[preOrderIndex]);
+        // base case if starting index = end (end is the index after the last possible index)
+        if (begin+1 >= end) {
+            //System.err.println(preOrder[preOrderIndex]);
+            //System.err.println(preOrderIndex + " (" + begin + "," + end + ")");
+            visited[preOrderIndex] = true;
+            return new BinaryTreeNode<>(preOrder[preOrderIndex]);
+        }
+
+        // Each time find the element's location and set that as the root
+        int rootIndex = search(inOrder, preOrder[preOrderIndex]);
+        BinaryTreeNode<E> root = new BinaryTreeNode<>(inOrder[rootIndex]);
+
+        // Divide the left of the root as the left subtree
+        //System.err.println(preOrderIndex + " (" + begin + "," + end + ")");
+
+        root.leftChild = createBinaryTree(preOrder, inOrder, begin, rootIndex, preOrderIndex+1, visited);
+        System.err.println(root.element + " -> " + root.leftChild.element);
+        preOrderIndex = rootIndex;
+        System.err.println(preOrderIndex);
+        // Divide the right of the root as the right subtree
+        root.rightChild = createBinaryTree(preOrder, inOrder, rootIndex+1, end, preOrderIndex+1, visited);
+        System.err.println(root.element + " -> " + root.rightChild.element);
+        return root;
+    }
+
+    // An array storing inorder elements of a binary tree is not sorted
+    public int search(E[] arr, E element)
+    {
+        for (int i = 0; i < arr.length; i++)
+        {
+            if (arr[i] == element)
+                return i;
+        }
+        return -1;
+    }
+
     public int getDepth(BinaryTreeNode<E> node)
     {
         if (node == root) return 0;
@@ -87,7 +129,7 @@ public class BinaryTree<E> {
 
     public void preOrder(BinaryTreeNode<E> root)
     {
-        System.out.println(root.element);
+        System.out.print(root.element + " ");
         if (root.leftChild != null)
             preOrder(root.leftChild);
         if (root.rightChild != null)
