@@ -6,19 +6,7 @@ public class TreeTest {
 
     public static void main(String[] args)
     {
-        BinaryTree<Character> bt = new BinaryTree<>('A');
-        bt.getRoot().setChildren('B', 'C');
-        bt.getRoot().leftChild.setChildren('D', 'E');
-        bt.getRoot().leftChild.rightChild.setChildren('F', 'G');
-        bt.getRoot().rightChild.setChildren('H', 'I');
-        bt.getRoot().rightChild.rightChild.setChildren('J', 'K');
 
-        Character[] preOrder = {'A', 'B', 'D', 'E', 'F', 'G', 'C', 'H', 'I', 'J', 'K'};
-        Character[] inOrder = {'D', 'B', 'F', 'E', 'G', 'A', 'H', 'C', 'J', 'I', 'K'};
-        BinaryTree<Character> tree = new BinaryTree<>(bt.createBinaryTree(preOrder, inOrder, 0, inOrder.length, 0));
-        tree.preOrder(tree.getRoot());
-        System.out.println();
-        tree.inOrder(tree.getRoot());
     }
 
     // For the JUnit tests, it is complicated to check whether the stuff
@@ -86,5 +74,32 @@ public class TreeTest {
         bt.postOrder(bt.getRoot());
         System.out.println();
         bt.postOrderIterative(bt.getRoot());
+    }
+
+    @Test
+    public void testInorderAndPreOrderConstruction() {
+        BinaryTree<Character> bt = new BinaryTree<>('A');
+        bt.getRoot().setChildren('B', 'C');
+        bt.getRoot().leftChild.setChildren('D', 'E');
+        bt.getRoot().leftChild.rightChild.setChildren('F', 'G');
+        bt.getRoot().rightChild.setChildren('H', 'I');
+        bt.getRoot().rightChild.rightChild.setChildren('J', 'K');
+
+        Character[] preOrder = {'A', 'B', 'D', 'E', 'F', 'G', 'C', 'H', 'I', 'J', 'K'};
+        Character[] inOrder = {'D', 'B', 'F', 'E', 'G', 'A', 'H', 'C', 'J', 'I', 'K'};
+        BinaryTree<Character> tree = new BinaryTree<>(bt.createBinaryTree(preOrder, inOrder));
+        tree.preOrder(tree.getRoot());
+        System.out.println();
+        tree.inOrder(tree.getRoot());
+        System.out.println();
+
+        bt = new BinaryTree<>('A');
+        bt.getRoot().setChildren('B', 'C');
+        Character[] preOrder2 = {'A', 'B', 'C'};
+        Character[] inOrder2 = {'B', 'A', 'C'};
+        tree = new BinaryTree<>(bt.createBinaryTree(preOrder2, inOrder2));
+        tree.preOrder(tree.getRoot());
+        System.out.println();
+        tree.inOrder(tree.getRoot());
     }
 }
