@@ -14,6 +14,10 @@ public class Tree <E> implements Iterable<E>{
      * of the tree when doing certain operations
      */
 
+    /**
+     * Hopefully these methods are self-explanatory
+     * I'm not going to javadoc all this so that I can rest
+     */
     public Tree(E element)
     {
         root = new TreeNode<>(element);
@@ -40,14 +44,22 @@ public class Tree <E> implements Iterable<E>{
         return node == root;
     }
 
-    // parameter is the leaf of a subtree
+    /**
+     * Returns the depth of a node
+     * @param node      node of a tree
+     * @return          the depth of the node
+     */
     public int depth(TreeNode<E> node)
     {
         if (node == root) return 0;
         else return depth(node.parent) + 1;
     }
 
-    // parameter is the root of the subtree
+    /**
+     * Returns the height of a node
+     * @param node      node of a tree
+     * @return          the height of the node
+     */
     public int height(TreeNode<E> node)
     {
         int maxHeight = 1;
@@ -58,6 +70,10 @@ public class Tree <E> implements Iterable<E>{
         return maxHeight;
     }
 
+    /**
+     * Prints the BinaryTree elements in preorder recursively
+     * @param root  the root of the subtree
+     */
     public void preOrder(TreeNode<E> root)
     {
         System.out.print(root.element);
@@ -66,6 +82,10 @@ public class Tree <E> implements Iterable<E>{
         }
     }
 
+    /**
+     * Prints the BinaryTree elements in inorder iteratively
+     * @param root  the root of the subtree
+     */
     public void preOrderIterative(TreeNode<E> root)
     {
         Stack<TreeNode<E>> s = new Stack<>();
@@ -83,6 +103,10 @@ public class Tree <E> implements Iterable<E>{
     // I did not implement inorder because it seemed redundant
     // Also I couldn't figure out how to implement the iterative version of postOrder for a general tree
     // Pretty sure postOrder/inOrder traversal is useless for general trees anyways
+    /**
+     * Prints the BinaryTree elements in postorder recursively
+     * @param root  the root of the subtree
+     */
     public void postOrder(TreeNode<E> root)
     {
         for (int i = 0; i < root.children.size(); i++) {
@@ -91,6 +115,10 @@ public class Tree <E> implements Iterable<E>{
         System.err.println(root.element);
     }
 
+    /**
+     * Returns an iterator which iterates preorder elements
+     * @return  returns the iterator
+     */
     public Iterator<E> iterator() {
         //return new TreeIterator<E>();
         return new TreeIterator<>(this);
@@ -103,6 +131,10 @@ public class Tree <E> implements Iterable<E>{
         int current;
         ArrayList<E> order = new ArrayList<>();
 
+        /**
+         * Creates an Iterator object
+         * @param tree  the tree to be iterated on
+         */
         public TreeIterator(Tree<E> tree)
         {
             current = 0;
@@ -120,28 +152,23 @@ public class Tree <E> implements Iterable<E>{
 
         }
 
+        /**
+         * Returns whether a next element exists
+         * @return  boolean
+         */
         @Override
         public boolean hasNext() {
             return current < order.size();
         }
 
+        /**
+         * Returns the next element
+         * @return     The next element
+         */
         @Override
         public E next() {
             current++;
             return order.get(current-1);
-        }
-
-        @Override
-        public void remove() {
-
-        }
-
-        public void postOrder(TreeNode<E> root)
-        {
-            for (int i = 0; i < root.children.size(); i++) {
-                postOrder(root.children().getElement(i));
-            }
-            order.add(root.element);
         }
     }
 
@@ -151,6 +178,10 @@ public class Tree <E> implements Iterable<E>{
         TreeNode<E> parent;
         LinkedList<TreeNode<E>> children;
 
+        /**
+         * All methods in this class are self-explanatory
+         * I already lost my sanity in writing these
+         */
         public TreeNode(E element) {
             parent = null;
             children = new LinkedList<>();
