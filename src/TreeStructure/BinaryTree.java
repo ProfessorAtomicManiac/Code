@@ -204,6 +204,8 @@ public class BinaryTree<E> {
      */
     public void inOrder(BinaryTreeNode<E> root)
     {
+        if (root == null)
+            return;
         if (root.leftChild != null)
             inOrder(root.leftChild);
         System.out.print(root.element + " ");
@@ -217,6 +219,8 @@ public class BinaryTree<E> {
      */
     public void inOrderIterative(BinaryTreeNode<E> root)
     {
+        if (root == null)
+            return;
         Stack<BinaryTreeNode<E>> visitedNodes = new Stack<>();
         visitedNodes.push(root);
 
@@ -225,6 +229,8 @@ public class BinaryTree<E> {
         while (!visitedNodes.isEmpty())
         {
             if (visitedNodes.peek().leftChild != null && current != visitedNodes.peek()) {
+                // NOTE: This is a custom stack class, so using a regular stack class may not work
+                // because my stack class can return null while the actual stack class will throw an exception
                 current = visitedNodes.peek();
                 visitedNodes.push(visitedNodes.peek().leftChild);
                 continue;
@@ -232,11 +238,14 @@ public class BinaryTree<E> {
             if (visitedNodes.peek().rightChild != null) {
                 BinaryTreeNode<E> tempNode = visitedNodes.peek();
                 System.out.print(visitedNodes.pop().element + " ");
+                // NOTE: This is a custom stack class, so using a regular stack class may not work
+                // because my stack class can return null while the actual stack class will throw an exception
                 current = visitedNodes.peek();
                 visitedNodes.push(tempNode.rightChild);
                 continue;
             }
             System.out.print(visitedNodes.pop().element + " ");
+            current = visitedNodes.peek();
         }
     }
 
