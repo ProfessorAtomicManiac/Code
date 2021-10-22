@@ -1,4 +1,3 @@
-
 package TreeStructure;
 
 import LinkedListStructures.Stack;
@@ -350,7 +349,7 @@ public class BinaryTree<E> {
 
             Stack<BinaryTreeNode<E>> visitedNodes = new Stack<>();
 
-            // I have no idea what an "enhanced switch loop" is but my IDE recommended it so
+            // I have no idea what an "enhanced switch loop" is, but my IDE recommended it so
             // it automatically formatted my code the way it is
             switch (tree.getTraversal()) {
 
