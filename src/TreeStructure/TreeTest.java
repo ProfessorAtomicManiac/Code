@@ -51,9 +51,40 @@ public class TreeTest {
     @Test
     public void testInOrder2()
     {
+        /*
         System.out.println();
         BinaryTree<Character> bt = new BinaryTree<>('A');
         bt.getRoot().setChildren('B', 'C');
+        bt.inOrder(bt.getRoot());
+        System.out.println();
+        bt.inOrderIterative(bt.getRoot());
+
+         */
+
+        /*
+        System.out.println();
+        BinaryTree<Integer> bt = new BinaryTree<Integer>(1);
+        bt.getRoot().setChildren(null, 2);
+        bt.getRoot().rightChild.setChildren(3, null);
+        bt.inOrder(bt.getRoot());
+        System.out.println();
+        bt.inOrderIterative(bt.getRoot());
+
+         */
+
+        /*
+        BinaryTree<Integer> bt = new BinaryTree<>(null);
+        //bt.getRoot().setChildren(null, 2);
+        //bt.getRoot().rightChild.setChildren(3, null);
+        bt.inOrder(bt.getRoot());
+        System.out.println();
+        bt.inOrderIterative(bt.getRoot());
+
+         */
+
+        BinaryTree<Integer> bt = new BinaryTree<>(1);
+        bt.getRoot().setChildren(null, 2);
+        //bt.getRoot().rightChild.setChildren(3, null);
         bt.inOrder(bt.getRoot());
         System.out.println();
         bt.inOrderIterative(bt.getRoot());
