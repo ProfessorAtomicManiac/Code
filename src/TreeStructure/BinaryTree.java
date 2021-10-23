@@ -1,5 +1,8 @@
 package TreeStructure;
 
+// NOTE: This class uses a custom stack class, so using a regular stack class may not work
+// because my stack class can return null while the actual stack class will throw an exception
+// if implementing with a regular stack, just have if statements take care of the case if the stack is empty
 import LinkedListStructures.Stack;
 
 import java.util.ArrayList;
@@ -342,6 +345,8 @@ public class BinaryTree<E> {
         int current;
 
         // Stores the order in an array
+        // There is probably a way to do it where you don't have to store the values in an array
+        // but this works too, although it is inefficient
         ArrayList<E> order = new ArrayList<>();
 
         /**
@@ -352,12 +357,15 @@ public class BinaryTree<E> {
         {
             // Stores all the elements into an Arraylist so that
             // the .next() methods are just iterating through an array
-            // Also if user decides to change traversal midway through the program
-            // it will not break the iterator
             current = 0;
 
             Stack<BinaryTreeNode<E>> visitedNodes = new Stack<>();
+            // NOTE: This is a custom stack class, so using a regular stack class may not work
+            // because my stack class can return null while the actual stack class will throw an exception
+            // if implementing with a regular stack, just have if statements take care of the case if the stack is empty
 
+            if (tree.getRoot() == null)
+                return;
             // I have no idea what an "enhanced switch loop" is, but my IDE recommended it so
             // it automatically formatted my code the way it is
             switch (tree.getTraversal()) {
@@ -392,6 +400,7 @@ public class BinaryTree<E> {
                             continue;
                         }
                         order.add(visitedNodes.pop().element);
+                        current = visitedNodes.peek();
                     }
                 }
                 case POSTORDER -> {
