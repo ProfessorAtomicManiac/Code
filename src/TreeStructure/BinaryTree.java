@@ -145,12 +145,25 @@ public class BinaryTree<E> {
     /**
      * Returns the depth of the node
      * @param node  The node
-     * @return      The depth of the node
+     * @return      The depth of the node (The number of nodes from the node to the root)
      */
     public int getDepth(BinaryTreeNode<E> node)
     {
         if (node == root) return 0;
         else return getDepth(node.parent) + 1;
+    }
+
+    /**
+     * Returns the height of the node
+     * @param root  The node
+     * @return      The height of the node (The number of nodes from the root to the farthest leaf)
+     */
+    public int getHeight(BinaryTreeNode<E> root) {
+        int maxHeight = 1;
+
+        if (root == null)
+            return 0;
+        return Math.max(maxHeight, Math.max(1+getHeight(root.leftChild), 1+getHeight(root.rightChild)));
     }
 
     /**

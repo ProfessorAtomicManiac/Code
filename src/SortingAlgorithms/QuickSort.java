@@ -42,7 +42,7 @@ public class QuickSort {
 
     public static void main(String[] args) {
         //int[] arr = {34, 2, 1, 1, -1, 234, 284, -2349, 38, 28283};
-        int[] arr = {3, 3, 3, 2, 5, 5, 5, 5};
+        int[] arr = {8, 6, 4, 9, 7, 5, 6, 6, 6, 9};
         quickSort(arr, 0, arr.length);
         for (int j : arr) {
             System.out.print(j + ", ");
