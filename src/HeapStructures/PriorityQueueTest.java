@@ -54,6 +54,7 @@ public class PriorityQueueTest {
         assertEquals('C', (char) q.min(), "The character is not right! ");
     }
 
+    @Disabled
     @Test
     public void testSortedInsert()
     {
@@ -70,6 +71,7 @@ public class PriorityQueueTest {
         assertEquals('A', q.removeMin(), "WRONG_ANSWER");
     }
 
+    @Disabled
     @Test
     public void testSortedInsert2()
     {
@@ -90,5 +92,42 @@ public class PriorityQueueTest {
         assertEquals('H', q.removeMin(), "WRONG_ANSWER");
         assertEquals('L', q.removeMin(), "WRONG_ANSWER");
 
+    }
+
+    @Test
+    public void testHeapInsert1()
+    {
+        HeapPriorityQueue<Integer, Character> q = new HeapPriorityQueue<>();
+        q.setComparator(Integer::compareTo);
+        q.insert(6, 'A');
+        q.insert(2, 'B');
+        q.insert(4, 'C');
+        q.insert(3, 'D');
+
+        assertEquals('B', q.removeMin(), "WRONG_ANSWER");
+        assertEquals('D', q.removeMin(), "WRONG_ANSWER");
+        assertEquals('C', q.removeMin(), "WRONG_ANSWER");
+        assertEquals('A', q.removeMin(), "WRONG_ANSWER");
+    }
+
+    @Test
+    public void testHeapInsert2()
+    {
+        HeapPriorityQueue<Integer, Character> q = new HeapPriorityQueue<>();
+        q.setComparator(Integer::compareTo);
+        q.insert(5, 'A');
+        q.insert(4, 'B');
+        q.insert(7, 'F');
+        q.insert(1, 'D');
+        assertEquals('D', q.removeMin(), "WRONG_ANSWER");
+        q.insert(3, 'J');
+        q.insert(6, 'L');
+        assertEquals('J', q.removeMin(), "WRONG_ANSWER");
+        assertEquals('B', q.removeMin(), "WRONG_ANSWER");
+        q.insert(8, 'G');
+        assertEquals('A', q.removeMin(), "WRONG_ANSWER");
+        q.insert(2, 'H');
+        assertEquals('H', q.removeMin(), "WRONG_ANSWER");
+        assertEquals('L', q.removeMin(), "WRONG_ANSWER");
     }
 }
