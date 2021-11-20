@@ -1,5 +1,6 @@
 package HeapStructures;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -21,6 +22,7 @@ public class HeapPriorityQueue<K, V> {
 
     public HeapPriorityQueue(Comparator<K> comparator)
     {
+        heap = new ArrayList<>();
         this.comparator = comparator;
     }
 
@@ -70,15 +72,50 @@ public class HeapPriorityQueue<K, V> {
         V val = heap.remove(heap.size()-1).val;
         // Downheap
         int n = 0;
-        while (heap.size() != 0 && 2*n+1 < heap.size())
+        while (heap.size() != 0)
         {
-            if (comparator.compare(heap.get(n).key, heap.get(2*n+1).key) > 0)
-            {
-                swap(n, (2*n+1));
-                n = 2*n+1;
-            } else break;
+            int temp = n;
+            // If there exists two children
+            if (2*n+2 < heap.size()) {
+                // If left child is smaller than right child
+                if (comparator.compare(heap.get(2 * n + 1).key, heap.get(2 * n + 2).key) < 0) {
+                    if (comparator.compare(heap.get(n).key, heap.get(2 * n + 1).key) > 0) {
+                        swap(n, (2 * n + 1));
+                        n = 2 * n + 1;
+                    }
+                // If left child is equal to or greater than right child
+                } else {
+                    if (2*n+2 < heap.size()) {
+                        if (comparator.compare(heap.get(n).key, heap.get(2*n+2).key) > 0) {
+                            swap(n, (2 * n + 2));
+                            n = 2 * n + 2;
+                        }
+                    }
+                }
+            // If there only exists a left child
+            } else if (2*n+1 < heap.size()) {
+                // If left child is smaller than parent
+                if (comparator.compare(heap.get(n).key, heap.get(2 * n + 1).key) > 0) {
+                    swap(n, (2 * n + 1));
+                    n = 2 * n + 1;
+                }
+            }
+            // If all its children are bigger
+            if (temp == n)
+                break;
         }
         return val;
+    }
+
+    // Sorted by keys
+    public ArrayList<V> heapSort()
+    {
+        ArrayList<V> sorted = new ArrayList<>();
+        while (heap.size() > 0)
+        {
+            sorted.add(removeMin());
+        }
+        return sorted;
     }
 
     private void swap(int a, int b)

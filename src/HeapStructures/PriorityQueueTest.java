@@ -1,8 +1,12 @@
 package HeapStructures;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Disabled;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PriorityQueueTest {
 
@@ -129,5 +133,27 @@ public class PriorityQueueTest {
         q.insert(2, 'H');
         assertEquals('H', q.removeMin(), "WRONG_ANSWER");
         assertEquals('L', q.removeMin(), "WRONG_ANSWER");
+    }
+
+    @Test
+    public void heapSort()
+    {
+        HeapPriorityQueue<Integer, Integer> q = new HeapPriorityQueue<>(Integer::compareTo);
+        q.insert(5, 5);
+        q.insert(4, 4);
+        q.insert(6, 6);
+        q.insert(7, 7);
+        assertEquals(4, q.min());
+        q.insert(1, 1);
+        q.insert(2, 2);
+        q.insert(3, 3);
+        q.insert(8, 8);
+        q.insert(8, 8);
+        q.insert(9, 9);
+        q.insert(10, 10);
+
+        ArrayList<Integer> sorted = q.heapSort();
+
+        assertEquals(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 8, 9, 10)), sorted);
     }
 }
