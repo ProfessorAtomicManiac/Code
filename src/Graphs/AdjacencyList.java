@@ -1,6 +1,6 @@
 package Graphs;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 /*
  * Directed Graph
@@ -10,16 +10,16 @@ import java.util.ArrayList;
 
 public class AdjacencyList <V, E> {
 
-    ArrayList<VertexElement<V, E>> list = new ArrayList<>();
+    LinkedList<VertexElement<V, E>> list = new LinkedList<>();
 
     public int numVertices()
     {
         return list.size();
     }
 
-    public ArrayList<V> vertices()
+    public LinkedList<V> vertices()
     {
-       ArrayList<V> vertices = new ArrayList<>();
+       LinkedList<V> vertices = new LinkedList<>();
        for (VertexElement<V, E> vertexEle : list)
            vertices.add(vertexEle.vertex);
        return vertices;
@@ -33,9 +33,9 @@ public class AdjacencyList <V, E> {
         return numEdges;
     }
 
-    public ArrayList<Edge<V, E>> edges()
+    public LinkedList<Edge<V, E>> edges()
     {
-        ArrayList<Edge<V, E>> edges = new ArrayList<>();
+        LinkedList<Edge<V, E>> edges = new LinkedList<>();
         for (VertexElement<V, E> vertexEle : list)
         {
             edges.addAll(vertexEle.edges);
@@ -101,9 +101,9 @@ public class AdjacencyList <V, E> {
         return num;
     }
 
-    public ArrayList<Edge<V, E>> outgoingEdges(V vertex)
+    public LinkedList<Edge<V, E>> outgoingEdges(V vertex)
     {
-        ArrayList<Edge<V, E>> edges = new ArrayList<>();
+        LinkedList<Edge<V, E>> edges = new LinkedList<>();
         for (VertexElement<V, E> ve : list)
         {
             if (ve.vertex == vertex)
@@ -112,10 +112,9 @@ public class AdjacencyList <V, E> {
         return edges;
     }
 
-    public ArrayList<Edge<V, E>> incomingEdges(V vertex)
+    public LinkedList<Edge<V, E>> incomingEdges(V vertex)
     {
-        ArrayList<Edge<V, E>> edges = new ArrayList<>();
-        int num = 0;
+        LinkedList<Edge<V, E>> edges = new LinkedList<>();
         for (VertexElement<V, E> ve : list)
         {
             for (Edge<V, E> edge : ve.edges)
@@ -188,14 +187,14 @@ public class AdjacencyList <V, E> {
 
     static class VertexElement <V, E> {
         V vertex;
-        ArrayList<Edge<V, E>> edges = new ArrayList<>();
+        LinkedList<Edge<V, E>> edges = new LinkedList<>();
 
         public VertexElement(V vertex)
         {
             this.vertex = vertex;
         }
 
-        public VertexElement(V vertex, ArrayList<Edge<V, E>> edges)
+        public VertexElement(V vertex, LinkedList<Edge<V, E>> edges)
         {
             this.vertex = vertex;
             this.edges = edges;
@@ -219,9 +218,9 @@ public class AdjacencyList <V, E> {
             this.end = end;
         }
 
-        public ArrayList<V> endVertices()
+        public LinkedList<V> endVertices()
         {
-            ArrayList<V> endVertices = new ArrayList<>(2);
+            LinkedList<V> endVertices = new LinkedList<>();
             endVertices.add(begin); endVertices.add(end);
             return endVertices;
         }
