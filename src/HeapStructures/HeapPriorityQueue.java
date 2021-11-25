@@ -1,6 +1,5 @@
 package HeapStructures;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -43,18 +42,13 @@ public class HeapPriorityQueue<K, V> {
 
     public void insert(K key, V val)
     {
-        if (isEmpty())
-            heap.add(new Entry<>(key, val));
-        else
+        // Upheap
+        heap.add(new Entry<>(key, val));
+        int n = heap.size()-1;
+        while (comparator.compare(key, heap.get((n-1)/2).key) < 0 && n != 0)
         {
-            // Upheap
-            heap.add(new Entry<>(key, val));
-            int n = heap.size()-1;
-            while (comparator.compare(key, heap.get((n-1)/2).key) < 0 && n != 0)
-            {
-                swap((n-1)/2, n);
-                n = (n-1)/2;
-            }
+            swap((n-1)/2, n);
+            n = (n-1)/2;
         }
     }
 
