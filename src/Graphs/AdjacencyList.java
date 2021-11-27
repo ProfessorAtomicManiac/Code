@@ -10,6 +10,9 @@ import java.util.LinkedList;
 
 public class AdjacencyList <V, E> {
 
+    // I think in this case, it would be better to use LinkedList since insertion of elements is quicker than that of
+    // ArrayList, and also it doesn't matter that accessing elements for Arraylist is fast since we need to iterate through the list to
+    // find a certain value, at which case both data structures perform the same
     LinkedList<VertexElement<V, E>> list = new LinkedList<>();
 
     public int numVertices()
