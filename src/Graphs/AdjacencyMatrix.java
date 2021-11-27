@@ -78,22 +78,15 @@ public class AdjacencyMatrix <V, E> {
 
     public int inDegree(V vertex)
     {
-        boolean vertexExists = false;
         int num = 0;
-        for (int i = 0; i < matrix.size(); i++)
-        {
-            if (indexToVertex.get(i) == vertex)
-                vertexExists = true;
-            for (Edge<V, E> edge : matrix.get(i))
-            {
+        for (ArrayList<Edge<V, E>> edges : matrix) {
+            for (Edge<V, E> edge : edges) {
                 if (edge == null)
                     continue;
                 if (edge.end == vertex)
                     ++num;
             }
         }
-        if (!vertexExists)
-            return -1;
         return num;
     }
 
@@ -128,15 +121,9 @@ public class AdjacencyMatrix <V, E> {
         return edges;
     }
 
-    // No duplicate vertexes
-    public boolean insertVertex(V vertex)
+    // Duplicate vertexes can be made
+    public void insertVertex(V vertex)
     {
-        // Check if vertex exists
-        for (int i = 0; i < matrix.size(); i++)
-        {
-            if (indexToVertex.get(i) == vertex)
-                return false;
-        }
         for (ArrayList<Edge<V, E>> edges : matrix)
         {
             edges.add(null);
@@ -147,18 +134,13 @@ public class AdjacencyMatrix <V, E> {
         matrix.add(edges);
         vertexToIndex.put(vertex, matrix.size()-1);
         indexToVertex.put(matrix.size()-1, vertex);
-        return true;
     }
 
-    // No duplicate edges
-    public boolean insertEdge(V begin, V end, E edgeData)
+    // Duplicate edges can be made
+    public void insertEdge(V begin, V end, E edgeData)
     {
-        // if an edge already exists there
-        if (matrix.get(vertexToIndex.get(begin)).get(vertexToIndex.get(end)) != null)
-            return false;
         Edge<V, E> edge = new Edge<>(begin, end, edgeData);
         matrix.get(vertexToIndex.get(begin)).set(vertexToIndex.get(end), edge);
-        return true;
     }
 
     public void removeVertex(V vertex)

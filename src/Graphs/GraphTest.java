@@ -2,21 +2,19 @@ package Graphs;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.List;
 
 public class GraphTest {
 
-    static AdjacencyMatrix<Integer, Character> graph;
+    static EdgeList<Integer, Character> graph;
 
     // These tests were all done identical for all graphs, I just switched around the class types
     @BeforeEach
     public void initialization()
     {
-        graph = new AdjacencyMatrix<>();
+        graph = new EdgeList<>();
         graph.insertVertex(1);
         graph.insertVertex(2);
         graph.insertVertex(3);
@@ -31,24 +29,32 @@ public class GraphTest {
     @Test
     public void testAdjacencyList1()
     {
-        ArrayList<Integer> vertices = graph.vertices();
+        List<Integer> vertices = graph.vertices();
         Assertions.assertEquals(vertices.get(0), 1);
         Assertions.assertEquals(vertices.get(1), 2);
         Assertions.assertEquals(vertices.get(2), 3);
         Assertions.assertEquals(vertices.get(3), 4);
         Assertions.assertEquals(graph.numEdges(), 5);
 
-        ArrayList<AdjacencyMatrix.Edge<Integer, Character>> edges = graph.edges();
+        /* This test is for Adjacency Matrix/List
+        List<EdgeList.Edge<Integer, Character>> edges = graph.edges();
         Assertions.assertEquals(edges.get(0).ele, 'A');
         Assertions.assertEquals(edges.get(1).ele, 'E');
         Assertions.assertEquals(edges.get(2).ele, 'B');
         Assertions.assertEquals(edges.get(3).ele, 'C');
+         */
+
+        List<EdgeList.Edge<Integer, Character>> edges = graph.edges();
+        Assertions.assertEquals(edges.get(0).ele, 'A');
+        Assertions.assertEquals(edges.get(1).ele, 'B');
+        Assertions.assertEquals(edges.get(2).ele, 'C');
+        Assertions.assertEquals(edges.get(3).ele, 'D');
     }
 
     @Test
     public void testAdjacencyList2()
     {
-        AdjacencyMatrix.Edge<Integer, Character> edge = graph.getEdge(3, 1);
+        EdgeList.Edge<Integer, Character> edge = graph.getEdge(3, 1);
         Assertions.assertEquals(edge.ele, 'C');
         edge = graph.getEdge(1, 4);
         Assertions.assertNull(edge);
@@ -61,12 +67,16 @@ public class GraphTest {
         Assertions.assertEquals(graph.outDegree(3), 2);
         Assertions.assertEquals(graph.inDegree(1), 1);
         Assertions.assertEquals(graph.inDegree(3), 2);
-        ArrayList<AdjacencyMatrix.Edge<Integer, Character>> edges = graph.outgoingEdges(3);
+        List<EdgeList.Edge<Integer, Character>> edges = graph.outgoingEdges(3);
         Assertions.assertEquals(edges.get(0).ele, 'C');
         Assertions.assertEquals(edges.get(1).ele, 'D');
         edges = graph.incomingEdges(3);
+        /* This is for Adjacency Matrix/List
         Assertions.assertEquals(edges.get(0).ele, 'E');
         Assertions.assertEquals(edges.get(1).ele, 'B');
+         */
+        Assertions.assertEquals(edges.get(0).ele, 'B');
+        Assertions.assertEquals(edges.get(1).ele, 'E');
     }
 
     @Test

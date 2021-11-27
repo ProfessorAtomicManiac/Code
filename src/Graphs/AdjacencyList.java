@@ -82,25 +82,20 @@ public class AdjacencyList <V, E> {
             if (ve.vertex == vertex)
                 return ve.edges.size();
         }
-        return -1;
+        return 0;
     }
 
     public int inDegree(V vertex)
     {
-        boolean vertexExists = false;
         int num = 0;
         for (VertexElement<V, E> ve : list)
         {
-            if (ve.vertex == vertex)
-                vertexExists = true;
             for (Edge<V, E> edge : ve.edges)
             {
                 if (edge.end == vertex)
                     ++num;
             }
         }
-        if (!vertexExists)
-            return -1;
         return num;
     }
 
@@ -129,29 +124,19 @@ public class AdjacencyList <V, E> {
         return edges;
     }
 
-    // No duplicate vertexes
+    // Duplicate vertexes can be made
     public boolean insertVertex(V vertex)
     {
-        for (VertexElement<V, E> ve : list)
-        {
-            if (ve.vertex == vertex)
-                return false;
-        }
         list.add(new VertexElement<>(vertex));
         return true;
     }
 
-    // No duplicate edges
+    // Duplicate edges can be made
     public boolean insertEdge(V begin, V end, E edgeData)
     {
         for (VertexElement<V, E> ve : list)
         {
             if (ve.vertex == begin) {
-                for (Edge<V, E> edge : ve.edges)
-                {
-                    if (edge.end == end)
-                        return false;
-                }
                 ve.addEdge(new Edge<>(edgeData, begin, end));
                 return true;
             }
