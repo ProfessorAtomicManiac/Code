@@ -2,13 +2,14 @@ package Graphs;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /*
  * V = Vertex Type
  * E = Edge Type
  */
 
-public class AdjacencyMatrix <V, E> {
+public class AdjacencyMatrix <V, E> implements Graph<V, E> {
 
     // For this matrix, the row index is where the edge starts and the column index is where the edge ends
     private ArrayList<ArrayList<Edge<V, E>>> matrix = new ArrayList<>();
@@ -22,7 +23,7 @@ public class AdjacencyMatrix <V, E> {
         return matrix.size();
     }
 
-    public ArrayList<V> vertices()
+    public List<V> vertices()
     {
         return new ArrayList<>(vertexToIndex.keySet());
     }
@@ -41,9 +42,9 @@ public class AdjacencyMatrix <V, E> {
         return numEdges;
     }
 
-    public ArrayList<Edge<V, E>> edges()
+    public List<Edge<V, E>> edges()
     {
-        ArrayList<Edge<V, E>> edges = new ArrayList<>();
+        List<Edge<V, E>> edges = new ArrayList<>();
         for (ArrayList<Edge<V, E>> e : matrix)
         {
             for (Edge<V, E> edge : e) {
@@ -83,16 +84,16 @@ public class AdjacencyMatrix <V, E> {
             for (Edge<V, E> edge : edges) {
                 if (edge == null)
                     continue;
-                if (edge.end == vertex)
+                if (edge.getEnd() == vertex)
                     ++num;
             }
         }
         return num;
     }
 
-    public ArrayList<Edge<V, E>> outgoingEdges(V vertex)
+    public List<Edge<V, E>> outgoingEdges(V vertex)
     {
-        ArrayList<Edge<V, E>> edges = new ArrayList<>();
+        List<Edge<V, E>> edges = new ArrayList<>();
         for (int i = 0; i < matrix.size(); i++)
         {
             if (indexToVertex.get(i) == vertex) {
@@ -107,14 +108,14 @@ public class AdjacencyMatrix <V, E> {
         return edges;
     }
 
-    public ArrayList<Edge<V, E>> incomingEdges(V vertex)
+    public List<Edge<V, E>> incomingEdges(V vertex)
     {
-        ArrayList<Edge<V, E>> edges = new ArrayList<>();
+        List<Edge<V, E>> edges = new ArrayList<>();
         for (ArrayList<Edge<V, E>> edgeArray : matrix) {
             for (Edge<V, E> edge : edgeArray) {
                 if (edge == null)
                     continue;
-                if (edge.end == vertex)
+                if (edge.getEnd() == vertex)
                     edges.add(edge);
             }
         }
@@ -139,7 +140,7 @@ public class AdjacencyMatrix <V, E> {
     // Duplicate edges can be made
     public void insertEdge(V begin, V end, E edgeData)
     {
-        Edge<V, E> edge = new Edge<>(begin, end, edgeData);
+        Edge<V, E> edge = new Edge<>(edgeData, begin, end);
         matrix.get(vertexToIndex.get(begin)).set(vertexToIndex.get(end), edge);
     }
 
@@ -157,18 +158,5 @@ public class AdjacencyMatrix <V, E> {
     public void removeEdge(V begin, V end)
     {
         matrix.get(vertexToIndex.get(begin)).set(vertexToIndex.get(end), null);
-    }
-
-    static class Edge<V, E>
-    {
-        V begin;
-        V end;
-        E ele;
-        public Edge(V begin, V end, E data)
-        {
-            this.begin = begin;
-            this.end = end;
-            this.ele = data;
-        }
     }
 }

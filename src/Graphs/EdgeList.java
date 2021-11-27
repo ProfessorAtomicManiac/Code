@@ -6,8 +6,9 @@ package Graphs;
  */
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class EdgeList <V, E> {
+public class EdgeList <V, E> implements Graph<V, E>{
 
     ArrayList<V> vertexSeq = new ArrayList<>();
     ArrayList<Edge<V, E>> edgeSeq = new ArrayList<>();
@@ -27,7 +28,7 @@ public class EdgeList <V, E> {
         return edgeSeq.size();
     }
 
-    public ArrayList<Edge<V, E>> edges()
+    public List<Edge<V, E>> edges()
     {
         return edgeSeq;
     }
@@ -36,7 +37,7 @@ public class EdgeList <V, E> {
     {
         for (Edge<V, E> edge : edgeSeq)
         {
-            if (edge.start == begin && edge.end == end)
+            if (edge.getStart() == begin && edge.getEnd() == end)
                 return edge;
         }
         return null;
@@ -47,8 +48,9 @@ public class EdgeList <V, E> {
         int count = 0;
         for (Edge<V, E> edge : edgeSeq)
         {
-            if (edge.start == vertex)
+            if (edge.getStart() == vertex) {
                 ++count;
+            }
         }
         return count;
     }
@@ -58,31 +60,32 @@ public class EdgeList <V, E> {
         int count = 0;
         for (Edge<V, E> edge : edgeSeq)
         {
-            if (edge.end == vertex)
+            if (edge.getEnd() == vertex)
                 ++count;
         }
         return count;
     }
 
-    public ArrayList<Edge<V, E>> outgoingEdges(V vertex)
+    public List<Edge<V, E>> outgoingEdges(V vertex)
     {
         ArrayList<Edge<V, E>> edges = new ArrayList<>();
         for (Edge<V, E> edge : edgeSeq)
         {
-            if (edge.start == vertex)
+            if (edge.getStart() == vertex)
                 edges.add(edge);
         }
         return edges;
     }
 
-    public ArrayList<Edge<V, E>> incomingEdges(V vertex)
+    public List<Edge<V, E>> incomingEdges(V vertex)
     {
-        ArrayList<Edge<V, E>> edges = new ArrayList<>();
+        List<Edge<V, E>> edges = new ArrayList<>();
         for (Edge<V, E> edge : edgeSeq)
         {
-            if (edge.end == vertex)
+            if (edge.getEnd() == vertex)
                 edges.add(edge);
         }
+
         return edges;
     }
 
@@ -101,22 +104,12 @@ public class EdgeList <V, E> {
     public void removeVertex(V vertex)
     {
         vertexSeq.remove(vertex);
-        edgeSeq.removeIf(edge -> edge.start == vertex || edge.end == vertex);
+        edgeSeq.removeIf(edge -> edge.getStart() == vertex || edge.getEnd() == vertex);
     }
 
     public void removeEdge(V begin, V end)
     {
-        edgeSeq.removeIf(edge -> edge.start == begin && edge.end == end);
+        edgeSeq.removeIf(edge -> edge.getStart() == begin && edge.getEnd() == end);
     }
 
-    static class Edge <V, E>
-    {
-        E ele;
-        V start;
-        V end;
-        public Edge(E ele, V start, V end)
-        {
-            this.ele = ele; this.start = start; this.end = end;
-        }
-    }
 }

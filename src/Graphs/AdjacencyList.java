@@ -1,6 +1,7 @@
 package Graphs;
 
 import java.util.LinkedList;
+import java.util.List;
 
 /*
  * Directed Graph
@@ -8,7 +9,7 @@ import java.util.LinkedList;
  * E = edge type
  */
 
-public class AdjacencyList <V, E> {
+public class AdjacencyList <V, E> implements Graph<V, E>{
 
     // I think in this case, it would be better to use LinkedList since insertion of elements is quicker than that of
     // ArrayList, and also it doesn't matter that accessing elements for Arraylist is fast since we need to iterate through the list to
@@ -36,9 +37,9 @@ public class AdjacencyList <V, E> {
         return numEdges;
     }
 
-    public LinkedList<Edge<V, E>> edges()
+    public List<Edge<V, E>> edges()
     {
-        LinkedList<Edge<V, E>> edges = new LinkedList<>();
+        List<Edge<V, E>> edges = new LinkedList<>();
         for (VertexElement<V, E> vertexEle : list)
         {
             edges.addAll(vertexEle.edges);
@@ -54,7 +55,7 @@ public class AdjacencyList <V, E> {
             {
                 for (Edge<V, E> edge : vertexEle.edges)
                 {
-                    if (edge.end == end)
+                    if (edge.getEnd() == end)
                         return edge;
                 }
             }
@@ -68,7 +69,7 @@ public class AdjacencyList <V, E> {
         {
             for (Edge<V, E> edge : vertexEle.edges)
             {
-                if (edge.ele == ele)
+                if (edge.getEle() == ele)
                     return edge;
             }
         }
@@ -79,8 +80,9 @@ public class AdjacencyList <V, E> {
     {
         for (VertexElement<V, E> ve : list)
         {
-            if (ve.vertex == vertex)
+            if (ve.vertex == vertex) {
                 return ve.edges.size();
+            }
         }
         return 0;
     }
@@ -92,16 +94,16 @@ public class AdjacencyList <V, E> {
         {
             for (Edge<V, E> edge : ve.edges)
             {
-                if (edge.end == vertex)
+                if (edge.getEnd() == vertex)
                     ++num;
             }
         }
         return num;
     }
 
-    public LinkedList<Edge<V, E>> outgoingEdges(V vertex)
+    public List<Edge<V, E>> outgoingEdges(V vertex)
     {
-        LinkedList<Edge<V, E>> edges = new LinkedList<>();
+        List<Edge<V, E>> edges = new LinkedList<>();
         for (VertexElement<V, E> ve : list)
         {
             if (ve.vertex == vertex)
@@ -110,14 +112,14 @@ public class AdjacencyList <V, E> {
         return edges;
     }
 
-    public LinkedList<Edge<V, E>> incomingEdges(V vertex)
+    public List<Edge<V, E>> incomingEdges(V vertex)
     {
-        LinkedList<Edge<V, E>> edges = new LinkedList<>();
+        List<Edge<V, E>> edges = new LinkedList<>();
         for (VertexElement<V, E> ve : list)
         {
             for (Edge<V, E> edge : ve.edges)
             {
-                if (edge.end == vertex)
+                if (edge.getEnd() == vertex)
                     edges.add(edge);
             }
         }
@@ -125,23 +127,21 @@ public class AdjacencyList <V, E> {
     }
 
     // Duplicate vertexes can be made
-    public boolean insertVertex(V vertex)
+    public void insertVertex(V vertex)
     {
         list.add(new VertexElement<>(vertex));
-        return true;
     }
 
     // Duplicate edges can be made
-    public boolean insertEdge(V begin, V end, E edgeData)
+    public void insertEdge(V begin, V end, E edgeData)
     {
         for (VertexElement<V, E> ve : list)
         {
             if (ve.vertex == begin) {
                 ve.addEdge(new Edge<>(edgeData, begin, end));
-                return true;
+                return;
             }
         }
-        return false;
     }
 
     public void removeVertex(V vertex)
@@ -149,7 +149,7 @@ public class AdjacencyList <V, E> {
         list.removeIf(ve -> ve.vertex == vertex);
         for (VertexElement<V, E> ve : list)
         {
-            ve.edges.removeIf(edge -> edge.end == vertex);
+            ve.edges.removeIf(edge -> edge.getEnd() == vertex);
         }
     }
 
@@ -159,17 +159,9 @@ public class AdjacencyList <V, E> {
         {
             if (ve.vertex == begin)
             {
-                ve.edges.removeIf(e -> e.end == end);
+                ve.edges.removeIf(e -> e.getEnd() == end);
                 break;
             }
-        }
-    }
-
-    public void removeEdge(E edge)
-    {
-        for (VertexElement<V, E> ve : list)
-        {
-            ve.edges.removeIf(e -> e.ele == edge);
         }
     }
 
@@ -191,26 +183,6 @@ public class AdjacencyList <V, E> {
         public void addEdge(Edge<V, E> edge)
         {
             edges.add(edge);
-        }
-    }
-
-    static class Edge <V, E> {
-        E ele;
-        V begin;
-        V end;
-
-        public Edge(E ele, V begin, V end)
-        {
-            this.ele = ele;
-            this.begin = begin;
-            this.end = end;
-        }
-
-        public LinkedList<V> endVertices()
-        {
-            LinkedList<V> endVertices = new LinkedList<>();
-            endVertices.add(begin); endVertices.add(end);
-            return endVertices;
         }
     }
 }
