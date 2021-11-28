@@ -175,4 +175,69 @@ public class GraphTest {
         Assertions.assertEquals(graph.edges().size(), 0);
         graph.insertEdge(1, 2, 'A');
     }
+
+    public static void main(String[] args)
+    {
+        GraphAlgorithms<Integer, Character> graph = new GraphAlgorithms<>();
+        adjacentGraph = new AdjacencyList<>();
+        adjacentGraph.insertVertex(1);
+        adjacentGraph.insertVertex(2);
+        adjacentGraph.insertVertex(3);
+        adjacentGraph.insertVertex(4);
+        adjacentGraph.insertEdge(1, 2, 'A');
+        adjacentGraph.insertEdge(2, 3, 'B');
+        adjacentGraph.insertEdge(3, 1, 'C');
+        adjacentGraph.insertEdge(3, 4, 'D');
+        adjacentGraph.insertEdge(1, 3, 'E');
+        graph.dfs(adjacentGraph);
+
+        System.out.println();
+
+        GraphAlgorithms<Character, Integer> graphAlgo = new GraphAlgorithms<>();
+        Graph<Character, Integer> graph2 = new AdjacencyList<>();
+        graph2.insertVertex('A');
+        graph2.insertVertex('B');
+        graph2.insertVertex('C');
+        graph2.insertVertex('D');
+        graph2.insertVertex('E');
+        graph2.insertVertex('F');
+        graph2.insertEdge('A', 'B', 1);
+        graph2.insertEdge('B', 'A', 1);
+        graph2.insertEdge('A', 'C', 2);
+        graph2.insertEdge('C', 'A', 2);
+        graph2.insertEdge('A', 'D', 3);
+        graph2.insertEdge('D', 'A', 3);
+        graph2.insertEdge('B', 'C', 4);
+        graph2.insertEdge('C', 'B', 4);
+        graph2.insertEdge('B', 'E', 5);
+        graph2.insertEdge('E', 'B', 5);
+        graph2.insertEdge('F', 'C', 6);
+        graph2.insertEdge('C', 'F', 6);
+        graph2.insertEdge('C', 'D', 7);
+        graph2.insertEdge('D', 'C', 7);
+        graph2.insertEdge('D', 'F', 8);
+        graph2.insertEdge('F', 'D', 8);
+        graphAlgo.dfs(graph2);
+
+        System.out.println();
+
+        Graph<Character, Integer> graph3 = new AdjacencyList<>();
+        graph3.insertVertex('A');
+        graph3.insertVertex('B');
+        graph3.insertVertex('C');
+        graph3.insertVertex('D');
+        graph3.insertVertex('E');
+        graph3.insertVertex('F');
+        graph3.insertEdge('A', 'B', 1);
+        graph3.insertEdge('B', 'A', 1);
+        graph3.insertEdge('B', 'E', 5);
+        graph3.insertEdge('E', 'B', 5);
+        graph3.insertEdge('F', 'C', 6);
+        graph3.insertEdge('C', 'F', 6);
+        graph3.insertEdge('C', 'D', 7);
+        graph3.insertEdge('D', 'C', 7);
+        graph3.insertEdge('D', 'F', 8);
+        graph3.insertEdge('F', 'D', 8);
+        graphAlgo.dfs(graph3);
+    }
 }
