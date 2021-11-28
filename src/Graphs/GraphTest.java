@@ -176,6 +176,7 @@ public class GraphTest {
         graph.insertEdge(1, 2, 'A');
     }
 
+    // For DFS, I assumed there would not be edges that go from one node to itself
     public static void main(String[] args)
     {
         GraphAlgorithms<Integer, Character> graph = new GraphAlgorithms<>();
@@ -189,8 +190,10 @@ public class GraphTest {
         adjacentGraph.insertEdge(3, 1, 'C');
         adjacentGraph.insertEdge(3, 4, 'D');
         adjacentGraph.insertEdge(1, 3, 'E');
-        graph.dfs(adjacentGraph);
 
+        graph.dfs(adjacentGraph);
+        System.out.println();
+        graph.iterativeDFS(adjacentGraph);
         System.out.println();
 
         GraphAlgorithms<Character, Integer> graphAlgo = new GraphAlgorithms<>();
@@ -211,14 +214,18 @@ public class GraphTest {
         graph2.insertEdge('C', 'B', 4);
         graph2.insertEdge('B', 'E', 5);
         graph2.insertEdge('E', 'B', 5);
+        graph2.insertEdge('E', 'C', 9);
+        graph2.insertEdge('C', 'E', 9);
         graph2.insertEdge('F', 'C', 6);
         graph2.insertEdge('C', 'F', 6);
         graph2.insertEdge('C', 'D', 7);
         graph2.insertEdge('D', 'C', 7);
         graph2.insertEdge('D', 'F', 8);
         graph2.insertEdge('F', 'D', 8);
-        graphAlgo.dfs(graph2);
 
+        graphAlgo.dfs(graph2);
+        System.out.println();
+        graphAlgo.iterativeDFS(graph2);
         System.out.println();
 
         Graph<Character, Integer> graph3 = new AdjacencyList<>();
@@ -238,6 +245,10 @@ public class GraphTest {
         graph3.insertEdge('D', 'C', 7);
         graph3.insertEdge('D', 'F', 8);
         graph3.insertEdge('F', 'D', 8);
+
         graphAlgo.dfs(graph3);
+        System.out.println();
+        graphAlgo.iterativeDFS(graph3);
+        System.out.println();
     }
 }

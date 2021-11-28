@@ -1,6 +1,7 @@
 package Graphs;
 
 import java.util.HashMap;
+import java.util.Stack;
 
 public class GraphAlgorithms <V, E> {
 
@@ -18,11 +19,11 @@ public class GraphAlgorithms <V, E> {
      */
     public void dfs(Graph<V, E> graph)
     {
+        if (graph.numVertices() == 0)
+            return;
         HashMap<V, Boolean> visited = new HashMap<>();
         for (V vertex : graph.vertices())
             visited.put(vertex, false);
-        if (graph.numVertices() == 0)
-            return;
         for (V vertex : graph.vertices())
         {
             if (!visited.get(vertex)) {
@@ -56,6 +57,48 @@ public class GraphAlgorithms <V, E> {
             System.out.println("Discovery Edge - " + edge.getEle() + ": " + edge.getStart() + " -> " + edge.getEnd());
             visited.put(edge.getEnd(), true);
             dfs(graph, edge.getEnd(), visited, vertex);
+        }
+    }
+
+    public void iterativeDFS(Graph<V, E> graph)
+    {
+        HashMap<V, Boolean> visited = new HashMap<>();
+        for (V vertex : graph.vertices())
+            visited.put(vertex, false);
+
+        Stack<V> stack = new Stack<>();
+        Stack<V> preNode = new Stack<>();
+        for (V vertex : graph.vertices())
+        {
+            if (!visited.get(vertex)) {
+                System.out.println("New Connected Component: " + vertex);
+                stack.push(vertex);
+                while (!stack.isEmpty())
+                {
+                    V curr = stack.pop();
+                    if (visited.get(curr))
+                        continue;
+                    visited.put(curr, true);
+                    V backNode = null;
+                    if (!preNode.isEmpty()) {
+                        System.out.println("Discovery Edge - " + graph.getEdge(preNode.peek(), curr).getEle() + ": " + preNode.peek() + " -> " + curr);
+                        backNode = preNode.pop();
+                    }
+                    for (Edge<V, E> edge : graph.outgoingEdges(curr))
+                    {
+                        if (backNode != null)
+                            if (edge.getEnd() == backNode)
+                                continue;
+
+                        if (visited.get(edge.getEnd())) {
+                            System.out.println("Back-Edge - " + edge.getEle() + ": " + edge.getStart() + " -> " + edge.getEnd());
+                            continue;
+                        }
+                        preNode.push(curr);
+                        stack.push(edge.getEnd());
+                    }
+                }
+            }
         }
     }
 }
