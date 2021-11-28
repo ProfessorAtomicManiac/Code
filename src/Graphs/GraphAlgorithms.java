@@ -1,10 +1,16 @@
 package Graphs;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 
 public class GraphAlgorithms <V, E> {
 
+    /**
+     * The following dfs and bfs algorithms will print both discovery edges and back edges
+     * If you just want the discovery edges, then a lot of the code can be omitted
+     */
     public GraphAlgorithms()
     {
 
@@ -96,6 +102,60 @@ public class GraphAlgorithms <V, E> {
                         }
                         preNode.push(curr);
                         stack.push(edge.getEnd());
+                    }
+                }
+            }
+        }
+    }
+
+    public void bfs(Graph<V, E> graph)
+    {
+        HashMap<V, Boolean> visited = new HashMap<>();
+        for (V vertex : graph.vertices())
+            visited.put(vertex, false);
+        HashMap<Edge<V, E>, Boolean> visitedEdges = new HashMap<>();
+        for (Edge<V, E> edge : graph.edges())
+            visitedEdges.put(edge, false);
+
+        Queue<V> queue = new LinkedList<>();
+        Queue<V> preNode = new LinkedList<>();
+        for (V vertex : graph.vertices())
+        {
+            if (!visited.get(vertex)) {
+                System.out.println("New Connected Component: " + vertex);
+                queue.add(vertex);
+                while (!queue.isEmpty())
+                {
+                    V curr = queue.poll();
+                    if (visited.get(curr)) {
+                        if (!visitedEdges.get(graph.getEdge(preNode.peek(), curr))) {
+                            System.out.println("Back-Edge - " + graph.getEdge(preNode.peek(), curr).getEle() + ": " + preNode.peek() + " -> " + curr);
+                            visitedEdges.put(graph.getEdge(preNode.peek(), curr), true);
+                            preNode.poll();
+                        }
+                        continue;
+                    }
+                    visited.put(curr, true);
+                    V backNode = null;
+                    if (!preNode.isEmpty()) {
+                        System.out.println("Discovery Edge - " + graph.getEdge(preNode.peek(), curr).getEle() + ": " + preNode.peek() + " -> " + curr);
+                        visitedEdges.put(graph.getEdge(preNode.peek(), curr), true);
+                        backNode = preNode.poll();
+                    }
+                    for (Edge<V, E> edge : graph.outgoingEdges(curr))
+                    {
+                        if (backNode != null)
+                            if (edge.getEnd() == backNode) {
+                                visitedEdges.put(edge, true);
+                                continue;
+                            }
+                        if (visited.get(edge.getEnd())) {
+                            System.out.println("Back-Edge - " + edge.getEle() + ": " + edge.getStart() + " -> " + edge.getEnd());
+                            visitedEdges.put(edge, true);
+                            continue;
+                        }
+                        preNode.add(curr);
+                        queue.add(edge.getEnd());
                     }
                 }
             }

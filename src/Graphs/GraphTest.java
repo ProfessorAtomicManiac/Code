@@ -191,10 +191,14 @@ public class GraphTest {
         adjacentGraph.insertEdge(3, 4, 'D');
         adjacentGraph.insertEdge(1, 3, 'E');
 
+        /*
         graph.dfs(adjacentGraph);
         System.out.println();
         graph.iterativeDFS(adjacentGraph);
         System.out.println();
+        graph.bfs(adjacentGraph);
+        System.out.println();
+         */
 
         GraphAlgorithms<Character, Integer> graphAlgo = new GraphAlgorithms<>();
         Graph<Character, Integer> graph2 = new AdjacencyList<>();
@@ -223,10 +227,16 @@ public class GraphTest {
         graph2.insertEdge('D', 'F', 8);
         graph2.insertEdge('F', 'D', 8);
 
+        /*
         graphAlgo.dfs(graph2);
         System.out.println();
         graphAlgo.iterativeDFS(graph2);
         System.out.println();
+        graphAlgo.bfs(graph2);
+        System.out.println();
+         */
+
+
 
         Graph<Character, Integer> graph3 = new AdjacencyList<>();
         graph3.insertVertex('A');
@@ -246,9 +256,14 @@ public class GraphTest {
         graph3.insertEdge('D', 'F', 8);
         graph3.insertEdge('F', 'D', 8);
 
+        /*
         graphAlgo.dfs(graph3);
         System.out.println();
         graphAlgo.iterativeDFS(graph3);
         System.out.println();
+         */
+        graphAlgo.bfs(graph3);
+        System.out.println();
+
     }
 }
