@@ -6,48 +6,59 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.StringTokenizer;
 
 /**
  * Full solution to Problem 3
  */
 
-public class C {
+public class UpsolvedC {
 
-    static ArrayList<Integer> permutation;
+    /* The resulting answer will be the # of permutations of "R" and "D" (Representing Bessie going right and down as those are the only directions)
+     * that satisfies the following conditions:
+     *  1. The path does not intersect a haybale
+     *  2. The path turns at most K times
+     */
+
+    static ArrayList<Integer> permutation = new ArrayList<>();
     // 0-indexed
-    static HashMap<Point, Boolean> haybales;
+
+    // Glorified two-dimensional boolean array (Probably is also faster if using two-dimensional boolean array)
+    // Tracks whether that location is a haybale or not
+    static boolean[][] haybales;
+
     static int ans = 0;
+
+    // How many times Bessie can continue going down or right (updated during recursion)
     static int downsLeft;
     static int rightsLeft;
+
+    // Where Bessie currently is at (updated during recursion)
     static Point curr = new Point(0, 0);
+
     public static void main(String[] args) throws IOException {
+        // input
         BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
         PrintWriter pw = new PrintWriter(System.out);
         StringTokenizer st = new StringTokenizer(r.readLine());
-        // input
         int cases = Integer.parseInt(st.nextToken());
+
         for (int i = 0; i < cases; i++)
         {
-            permutation = new ArrayList<>();
-            haybales = new HashMap<>();
-
             st = new StringTokenizer(r.readLine());
             int grid = Integer.parseInt(st.nextToken());
             int turn = Integer.parseInt(st.nextToken());
+            haybales = new boolean[grid][grid];
             for (int j = 0; j < grid; j++)
             {
                 st = new StringTokenizer(r.readLine());
                 String str = st.nextToken();
                 for (int col = 0; col < grid; col++) {
-                    if (str.charAt(col) == '.')
-                        haybales.put(new Point(col, j), false);
-                    else
-                        haybales.put(new Point(col, j), true);
+                    haybales[col][j] = str.charAt(col) != '.';
                 }
             }
-            downsLeft = grid-1;
+
+            downsLeft = grid - 1;
             rightsLeft = grid - 1;
             // generate all permutations
             search(2*(grid-1), turn, 0);
@@ -76,11 +87,12 @@ public class C {
             }
             //System.err.println(curr.x + ", " + curr.y);
             --rightsLeft;
-
             // check if this hits haybale
-            if (!haybales.get(curr)) {
+            if (!haybales[curr.y][curr.x]) {
                 // check if number of turns is acceptable
-                if (turns <= maxTurns)
+                if (turns <= maxTurns - 1)
+                    search(size, maxTurns, turns);
+                else if (turns == maxTurns && downsLeft == 0)
                     search(size, maxTurns, turns);
             }
             ++rightsLeft;
@@ -104,9 +116,11 @@ public class C {
             // check if this hits haybale
             downsLeft--;
             //System.err.println(curr.x + ", " + curr.y);
-            if (!haybales.get(curr)) {
+            if (!haybales[curr.y][curr.x]) {
                 // check if number of turns is acceptable
-                if (turns <= maxTurns)
+                if (turns <= maxTurns - 1)
+                    search(size, maxTurns, turns);
+                else if (turns == maxTurns && rightsLeft == 0)
                     search(size, maxTurns, turns);
             }
             downsLeft++;

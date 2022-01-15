@@ -6,6 +6,10 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
+/**
+ * O(n) solution to Problem 1
+ */
+
 public class UpsolvedA {
     public static void main (String[] args) throws IOException {
         BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
