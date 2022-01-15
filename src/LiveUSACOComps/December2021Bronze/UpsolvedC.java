@@ -14,16 +14,24 @@ import java.util.StringTokenizer;
 
 public class UpsolvedC {
 
-    /* The resulting answer will be the # of permutations of "R" and "D" (Representing Bessie going right and down as those are the only directions)
-     * that satisfies the following conditions:
+    /* The resulting answer will be the # of permutations of "R" and "D" (Representing Bessie going right and down
+     * as those are the only directions) that satisfies the following conditions:
      *  1. The path does not intersect a haybale
      *  2. The path turns at most K times
+     *
+     * Just pruning the search based on that criteria will still result in a tle on the last few cases, so
+     * you can prune the search further where if Bessie cannot turn anymore and is not on the last row/column,
+     * then you can stop the search there for that path
+     *
+     * So prune all the following:
+     *  1. The path does intersect a haybale
+     *  2. The path turns more than K times
+     *  3. The path turns K times and is not on the last row/column
      */
 
     static ArrayList<Integer> permutation = new ArrayList<>();
     // 0-indexed
 
-    // Glorified two-dimensional boolean array (Probably is also faster if using two-dimensional boolean array)
     // Tracks whether that location is a haybale or not
     static boolean[][] haybales;
 
@@ -60,6 +68,7 @@ public class UpsolvedC {
 
             downsLeft = grid - 1;
             rightsLeft = grid - 1;
+
             // generate all permutations
             search(2*(grid-1), turn, 0);
             pw.println(ans);
@@ -77,24 +86,31 @@ public class UpsolvedC {
             ++ans;
             return;
         }
-        // Add 1
+        // Add 1 (Bessie goes right)
         if (rightsLeft - 1 >= 0) {
             permutation.add(1);
             curr.x++;
+
+            // Checks if this is a turn
             if (permutation.size() >= 2) {
                 if (!permutation.get(permutation.size() - 2).equals(permutation.get(permutation.size() - 1)))
                     ++turns;
             }
             //System.err.println(curr.x + ", " + curr.y);
             --rightsLeft;
+
             // check if this hits haybale
             if (!haybales[curr.y][curr.x]) {
                 // check if number of turns is acceptable
                 if (turns <= maxTurns - 1)
                     search(size, maxTurns, turns);
+
+                // check if the path turns K times and is on the last column
                 else if (turns == maxTurns && downsLeft == 0)
                     search(size, maxTurns, turns);
             }
+
+            // reset everything
             ++rightsLeft;
 
             if (permutation.size() >= 2) {
@@ -105,7 +121,8 @@ public class UpsolvedC {
             curr.x--;
         }
 
-        // Add 0
+        // Add 0 (Bessie goes down)
+        // This is a literal copy of the first big if statement except the up/downs are swapped
         if (downsLeft - 1 >= 0) {
             permutation.add(0);
             curr.y++;

@@ -12,8 +12,14 @@ import java.util.StringTokenizer;
 
 public class B {
 
+    /*  You can prove that the most optimized way to raise/lower the temperature is to raise the temperature of
+     *  a group of cells that are positive or negative by min(cells) for positive and max(cells) for negative
+     */
+
     static int[] change;
+
     public static void main(String[] args) throws IOException {
+        // input
         BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
         PrintWriter pw = new PrintWriter(System.out);
         StringTokenizer st = new StringTokenizer(r.readLine());
@@ -37,11 +43,18 @@ public class B {
         // Iterate to find consecutive values that are positive/negative for change array
         // Then add to ans the greatest/least val in those values
 
+        // Checks if all cells are at desired temperature
         while (check()) {
             int lastTrend = 0;
+            // Keeps track of where the trend started so that it can change the values
             int lastExVal = 0;
+            // This keep track of the min/max of the current trend (Stands for Last Extreme Value)
             int trend = 0;
+            // trends: 1 = positive trend, 0 = neutral trend, -1 = negative trend
+
             for (int i = 0; i < change.length; i++) {
+
+                // If val is positive
                 if (change[i] > 0) {
                     if (trend == 1) {
                         //System.err.println("Continuing Positive Trend at " + i);
@@ -59,11 +72,14 @@ public class B {
                         lastExVal = change[i];
                     }
                     if (i == change.length-1) {
+                        //System.err.println("At end of array");
                         ans += Math.abs(lastExVal);
                         for (; lastTrend < change.length; lastTrend++) {
                             change[lastTrend] -= Math.abs(lastExVal);
                         }
                     }
+
+                // If value is negative (Code nearly identical to positive if statement)
                 } else if (change[i] < 0) {
                     if (trend == -1) {
                         //System.err.println("Continuing Negative Trend at " + i);
@@ -88,6 +104,8 @@ public class B {
                             change[lastTrend] += Math.abs(lastExVal);
                         }
                     }
+
+                // If value is 0
                 } else {
                     //System.err.println("0 at " + i);
                     for (; lastTrend < i; lastTrend++) {
@@ -108,6 +126,8 @@ public class B {
         pw.println(ans);
         pw.close();
     }
+
+    // Checks if all cells are at desired temperature
     public static boolean check()
     {
         for (int i : change) {

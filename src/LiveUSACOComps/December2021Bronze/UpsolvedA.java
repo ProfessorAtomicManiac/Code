@@ -11,7 +11,20 @@ import java.util.ArrayList;
  */
 
 public class UpsolvedA {
+
+    /*  You can track the number of Guernsey between the Holsteins
+     *  Then the ans is just the number of combinations such that "GGH", "GHG", or "HGG"
+     *  Set # of Guernsey before one Holstein as x1 and # of Guernsey after that Holstein as x2
+     *  Then the number of lonely photos including that Holstein is
+     *  "GGH" = x1 - 1
+     *  "GHG" = x1 * x2
+     *  "HHG" = x2 - 1
+     *  Sum all these values for all Holsteins and repeat the steps above except that instead of
+     *  tracking the number of Guernsey between the Holsteins track the vice versa and add the values
+     */
+
     public static void main (String[] args) throws IOException {
+        // input
         BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
         PrintWriter pw = new PrintWriter(System.out);
         int n = Integer.parseInt(r.readLine());
