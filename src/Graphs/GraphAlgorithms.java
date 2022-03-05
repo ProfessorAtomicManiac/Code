@@ -1,11 +1,10 @@
 package Graphs;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
+import java.util.*;
 
 public class GraphAlgorithms <V, E> {
+
+    private final int INF = 1000000000;
 
     /**
      * The following dfs and bfs algorithms will print both discovery edges and back edges
@@ -159,6 +158,58 @@ public class GraphAlgorithms <V, E> {
                     }
                 }
             }
+        }
+    }
+
+    public Collection<Integer> dijkstra(Graph<V, E> graph, V vertex)
+    {
+        HashMap<V, Integer> dist = new HashMap<>();
+        PriorityQueue<Vertex<V>> pq = new PriorityQueue<>();
+        for (V v : graph.vertices())
+        {
+            if (v == vertex) {
+                pq.add(new Vertex<>(vertex, 0));
+                dist.put(vertex, 0);
+            } else {
+                pq.add(new Vertex<>(v, INF));
+                dist.put(v, INF);
+            }
+        }
+        while (!pq.isEmpty())
+        {
+            Vertex<V> u = pq.poll();
+            for (Edge<V, E> edge : graph.outgoingEdges(u.vertex))
+            {
+                if (u.dist + (int) edge.getEle() < dist.get(edge.getEnd()))
+                {
+                    // the equals method has been overridden
+                    pq.remove(new Vertex<>(edge.getEnd(), dist.get(edge.getEnd())));
+                    pq.add(new Vertex<>(edge.getEnd(), u.dist + (int) edge.getEle()));
+                    dist.put(edge.getEnd(), u.dist + (int) edge.getEle());
+                }
+            }
+        }
+        return dist.values();
+    }
+
+    static class Vertex <V> implements Comparable<Vertex<V>> {
+        V vertex;
+        int dist;
+        public Vertex (V v, int d) {
+            vertex = v; dist = d;
+        }
+
+        @Override
+        public int compareTo(Vertex<V> o) {
+            return Integer.compare(dist, o.dist);
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Vertex<?> vertex1 = (Vertex<?>) o;
+            return dist == vertex1.dist && Objects.equals(vertex, vertex1.vertex);
         }
     }
 }

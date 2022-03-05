@@ -2,6 +2,7 @@ package Graphs;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -50,6 +51,7 @@ public class GraphTest {
     }
 
     @Test
+    @Disabled
     public void test1()
     {
         test1EdgeMethod(edgeGraph);
@@ -98,6 +100,7 @@ public class GraphTest {
         Assertions.assertEquals(edges.get(3).getEle(), 'C');
     }
 
+    @Disabled
     @Test
     public void test2()
     {
@@ -114,6 +117,7 @@ public class GraphTest {
         Assertions.assertNull(edge);
     }
 
+    @Disabled
     @Test
     public void test3()
     {
@@ -156,6 +160,7 @@ public class GraphTest {
 
     }
 
+    @Disabled
     @Test
     public void test4()
     {
@@ -179,6 +184,7 @@ public class GraphTest {
     // For DFS, I assumed there would not be edges that go from one node to itself
     public static void main(String[] args)
     {
+        /*
         GraphAlgorithms<Integer, Character> graph = new GraphAlgorithms<>();
         adjacentGraph = new AdjacencyList<>();
         adjacentGraph.insertVertex(1);
@@ -231,35 +237,43 @@ public class GraphTest {
         System.out.println();
         graphAlgo.bfs(graph2);
         System.out.println();
+         */
 
+        GraphAlgorithms<Character, Integer> graphAlgo = new GraphAlgorithms<>();
+        Graph<Character, Integer> graph = new AdjacencyList<>();
+        graph.insertVertex('A');
+        graph.insertVertex('B');
+        graph.insertVertex('C');
+        graph.insertVertex('D');
+        graph.insertVertex('E');
+        graph.insertVertex('F');
+        graph.insertEdge('A', 'B', 1);
+        graph.insertEdge('B', 'A', 1);
+        graph.insertEdge('B', 'E', 5);
+        graph.insertEdge('E', 'B', 5);
+        graph.insertEdge('B', 'C', 3);
+        graph.insertEdge('C', 'B', 3);
+        graph.insertEdge('E', 'F', 10);
+        graph.insertEdge('F', 'E', 10);
 
+        graph.insertEdge('F', 'C', 6);
+        graph.insertEdge('C', 'F', 6);
+        graph.insertEdge('C', 'D', 7);
+        graph.insertEdge('D', 'C', 7);
+        graph.insertEdge('D', 'F', 8);
+        graph.insertEdge('F', 'D', 8);
 
-        Graph<Character, Integer> graph3 = new AdjacencyList<>();
-        graph3.insertVertex('A');
-        graph3.insertVertex('B');
-        graph3.insertVertex('C');
-        graph3.insertVertex('D');
-        graph3.insertVertex('E');
-        graph3.insertVertex('F');
-        graph3.insertEdge('A', 'B', 1);
-        graph3.insertEdge('B', 'A', 1);
-        graph3.insertEdge('B', 'E', 5);
-        graph3.insertEdge('E', 'B', 5);
-        graph3.insertEdge('F', 'C', 6);
-        graph3.insertEdge('C', 'F', 6);
-        graph3.insertEdge('C', 'D', 7);
-        graph3.insertEdge('D', 'C', 7);
-        graph3.insertEdge('D', 'F', 8);
-        graph3.insertEdge('F', 'D', 8);
-
-
-        graphAlgo.dfs(graph3);
+        /*
+        graphAlgo.dfs(graph);
         System.out.println();
-        graphAlgo.iterativeDFS(graph3);
+        graphAlgo.iterativeDFS(graph);
         System.out.println();
 
-        graphAlgo.bfs(graph3);
+        graphAlgo.bfs(graph);
         System.out.println();
+         */
 
+        for (int dist : graphAlgo.dijkstra(graph, 'A'))
+            System.out.println(dist);
     }
 }
