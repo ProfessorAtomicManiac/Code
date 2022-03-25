@@ -212,4 +212,35 @@ public class GraphAlgorithms <V, E> {
             return dist == vertex1.dist && Objects.equals(vertex, vertex1.vertex);
         }
     }
+
+    public Collection<Integer> prim(Graph<V, E> graph, V vertex)
+    {
+        HashMap<V, Integer> dist = new HashMap<>();
+        PriorityQueue<Vertex<V>> pq = new PriorityQueue<>();
+        for (V v : graph.vertices())
+        {
+            if (v == vertex) {
+                pq.add(new Vertex<>(vertex, 0));
+                dist.put(vertex, 0);
+            } else {
+                pq.add(new Vertex<>(v, INF));
+                dist.put(v, INF);
+            }
+        }
+        while (!pq.isEmpty())
+        {
+            Vertex<V> u = pq.poll();
+            for (Edge<V, E> edge : graph.outgoingEdges(u.vertex))
+            {
+                if ((int) edge.getEle() < dist.get(edge.getEnd()))
+                {
+                    // the equals method has been overridden
+                    pq.remove(new Vertex<>(edge.getEnd(), dist.get(edge.getEnd())));
+                    pq.add(new Vertex<>(edge.getEnd(), (int) edge.getEle()));
+                    dist.put(edge.getEnd(), (int) edge.getEle());
+                }
+            }
+        }
+        return dist.values();
+    }
 }
