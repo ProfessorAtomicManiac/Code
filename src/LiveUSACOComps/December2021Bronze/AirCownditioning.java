@@ -10,7 +10,7 @@ import java.util.StringTokenizer;
  * Full solution to Problem 2
  */
 
-public class B {
+public class AirCownditioning {
 
     /*  You can prove that the most optimized way to raise/lower the temperature is to raise the temperature of
      *  a group of cells that are positive or negative by min(cells) for positive and max(cells) for negative

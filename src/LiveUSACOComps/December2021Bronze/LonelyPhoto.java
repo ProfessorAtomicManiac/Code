@@ -11,7 +11,7 @@ import java.util.StringTokenizer;
  * Every other case passes for Problem 1
  */
 
-public class A {
+public class LonelyPhoto {
     public static void main(String[] args) throws IOException {
         BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
         PrintWriter pw = new PrintWriter(System.out);

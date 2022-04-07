@@ -13,7 +13,7 @@ import java.util.StringTokenizer;
  * Full solution to Problem 3
  */
 
-public class C {
+public class WalkingHome {
 
     static ArrayList<Integer> permutation;
     // 0-indexed

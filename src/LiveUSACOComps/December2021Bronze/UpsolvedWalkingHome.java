@@ -12,7 +12,7 @@ import java.util.StringTokenizer;
  * Full solution to Problem 3
  */
 
-public class UpsolvedC {
+public class UpsolvedWalkingHome {
 
     /* The resulting answer will be the # of permutations of "R" and "D" (Representing Bessie going right and down
      * as those are the only directions) that satisfies the following conditions:

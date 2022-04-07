@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * O(n) solution to Problem 1
  */
 
-public class UpsolvedA {
+public class UpsolvedLonelyPhoto {
 
     /*  You can track the number of Guernsey between the Holsteins
      *  Then the ans is just the number of combinations such that "GGH", "GHG", or "HGG"
