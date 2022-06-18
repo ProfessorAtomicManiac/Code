@@ -1,2 +1,2 @@
 # bruh
-Some homework I have to do for some coding class.
+CP is great u know, don't take that out of context
