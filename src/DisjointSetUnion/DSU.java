@@ -15,15 +15,23 @@ public class DSU <T> {
         nodes = new Node[n];
         for (int i = 0; i < n; i++)
         {
-            nodes[i] = new Node<>(null, i);
+            nodes[i] = new Node<>(null, i, 1);
             nodes[i].parent = nodes[i];
         }
     }
     public void union(Node<T> node1, Node<T> node2)
     {
         Node<T> root1 = find(node1);
-        // path compression should make the heights of both trees = 2
-        root1.parent = find(node2);
+        Node<T> root2 = find(node2);
+        if (root1 != root2) {
+            if (root1.size < root2.size) {
+                root1.parent = root2;
+                root2.size += root1.size;
+            } else {
+                root2.parent = root1;
+                root1.size += root2.size;
+            }
+        }
     }
 
     public Node<T> find(Node<T> node)
@@ -37,8 +45,9 @@ public class DSU <T> {
     static class Node <T> {
         Node<T> parent;
         T data;
-        public Node(Node<T> parent, T data) {
-            this.parent = parent; this.data = data;
+        int size;
+        public Node(Node<T> parent, T data, int size) {
+            this.parent = parent; this.data = data; this.size = size;
         }
     }
 
