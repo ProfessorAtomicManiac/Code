@@ -1,4 +1,4 @@
-package DisjointDataSet;
+package DisjointSetUnion;
 
 import java.io.BufferedReader;
 import java.io.IOException;
