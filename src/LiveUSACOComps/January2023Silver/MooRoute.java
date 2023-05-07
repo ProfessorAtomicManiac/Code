@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 /**
- * http://www.usaco.org/index.php?page=viewproblem2&cpid=1280
+ * <a href="http://www.usaco.org/index.php?page=viewproblem2&cpid=1280">...</a>
  * I can't believe I implemented segment tree, a gold topic data structure, on a bronze problem
  * Wasted 2+ hours cuz I forgot how to do segtree
  * I'm still pretty mad, this was one of the easiest silver lately

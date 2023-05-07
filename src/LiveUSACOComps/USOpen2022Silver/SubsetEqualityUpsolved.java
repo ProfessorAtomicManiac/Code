@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
 /**
- * http://www.usaco.org/index.php?page=viewproblem2&cpid=1231
+ * <a href="http://www.usaco.org/index.php?page=viewproblem2&cpid=1231">...</a>
  * Ironically a day or two later in the middle of school, I took like 40 minutes to write this solution
  * which worked. IDK what my competition self was doing, but he struggled to do it for 2+ hours and the solution
  * is at least 3x the length of this one.

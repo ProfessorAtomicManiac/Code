@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 /**
- * http://www.usaco.org/index.php?page=viewproblem2&cpid=1279
+ * <a href="http://www.usaco.org/index.php?page=viewproblem2&cpid=1279">...</a>
  * Surprised this was in silver, it was pretty easy. Still slow at impl cuz took about an hour in total
  * Full AC
  */

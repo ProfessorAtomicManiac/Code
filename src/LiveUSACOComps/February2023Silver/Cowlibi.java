@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.StringTokenizer;
 
 /**
- * http://www.usaco.org/index.php?page=viewproblem2&cpid=1303
+ * <a href="http://www.usaco.org/index.php?page=viewproblem2&cpid=1303">...</a>
  * Coded it in an hour and 15-30 mins ish. Reason why it took longer than it should have
  * was cuz I had wrong idea initially and I was slow at debugging
  */

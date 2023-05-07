@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.StringTokenizer;
 
 /**
- * http://www.usaco.org/index.php?page=viewproblem2&cpid=1304
+ * <a href="http://www.usaco.org/index.php?page=viewproblem2&cpid=1304">...</a>
  * Thought of solution and coded it in an hour-ish
  * Got test cases 1-10 and 13
  */

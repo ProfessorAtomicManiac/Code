@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 /**
- * http://www.usaco.org/index.php?page=viewproblem2&cpid=1232
+ * <a href="http://www.usaco.org/index.php?page=viewproblem2&cpid=1232">...</a>
  * First AC on a problem in Silver during a contest
  * 40 minutes flat to think of solution and implementation
  */

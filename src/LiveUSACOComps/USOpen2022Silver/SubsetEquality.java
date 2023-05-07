@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.PriorityQueue;
 
 /**
- * http://www.usaco.org/index.php?page=viewproblem2&cpid=1231
+ * <a href="http://www.usaco.org/index.php?page=viewproblem2&cpid=1231">...</a>
  * This is the shittiest solution I've ever seen, and obviously it doesn't work.
  * How did I mess up implementation this badly? IDK but this solution can be way shorter
  * and easier to code.

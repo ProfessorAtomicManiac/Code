@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.StringTokenizer;
 
 /**
- * http://www.usaco.org/index.php?page=viewproblem2&cpid=1230
+ * <a href="http://www.usaco.org/index.php?page=viewproblem2&cpid=1230">...</a>
  * This solution is just dfs, recording visited components, and cycle detection
  */
 

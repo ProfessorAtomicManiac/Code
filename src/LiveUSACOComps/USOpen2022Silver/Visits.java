@@ -6,7 +6,7 @@ import java.util.Stack;
 import java.util.StringTokenizer;
 
 /**
- * http://www.usaco.org/index.php?page=viewproblem2&cpid=1230
+ * <a href="http://www.usaco.org/index.php?page=viewproblem2&cpid=1230">...</a>
  * This solution only works if a_i != a_j for all i != j
  * So only got 3 test cases and solved one subtask
  */

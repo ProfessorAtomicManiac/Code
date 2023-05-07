@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 /**
- * http://www.usaco.org/index.php?page=viewproblem2&cpid=1230
+ * <a href="http://www.usaco.org/index.php?page=viewproblem2&cpid=1230">...</a>
  * This solution is just Prim-Jarnik's algorithm
  */
 

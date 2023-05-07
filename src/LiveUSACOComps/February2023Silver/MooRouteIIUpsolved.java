@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.StringTokenizer;
 
 /**
- * http://www.usaco.org/index.php?page=viewproblem2&cpid=1304
+ * <a href="http://www.usaco.org/index.php?page=viewproblem2&cpid=1304">...</a>
  * The only piece of code that is different from the contest submission
  * are lines 76-77. I was that damn close to an AC
  * Next time don't focus too much on one potential bug
